@@ -50,7 +50,7 @@ Arguments:
 ```
 Output location: /mnt/persistent-storage/siteExport_1726490121400
 ```
-- The file name will be based on the Page Friendly URL with / characters replaced with _. For example Page Friendly URL /mw/test/page-1 will be stored as _mw_test_page-1.html
+- The HTML file name will be based on the Page Friendly URL with / characters replaced with _. For example Page Friendly URL /mw/test/page-1 will be stored as _mw_test_page-1.html
 - On Liferay PaaS the output is written to the Liferay service and are accessible with the Liferay service shell. Depending on the outputBaseFolder the folder may not be persistent. /mnt/persistent-storage/ is persistent.
 
 **Downloading Output in Liferay PaaS**
@@ -60,7 +60,7 @@ Output location: /mnt/persistent-storage/siteExport_1726490121400
 - Ensure the latest version of the LCP CLI tool is being used.
 - Download the crawler output with the following command:
 ```
-lcp files download --prefix /siteExport_1726490121400/ --dest c:/temp
+lcp files download --prefix /siteExport_1726490121400 --dest c:/temp
 ```
 
 **Notes**
