@@ -34,8 +34,7 @@ Arguments:
 
 **Crawler User Account**
 
-The module is designed to use a non-SSO enabled account to perform the crawling. In addition:
-
+- The module is designed to use a non-SSO enabled account to perform the crawling.
 - The Instance Settings > User Authentication > 'Allow users to automatically log?' setting must be enabled while the tool is being setup and used. The setting can be disabled afterwards if not required. 
 - The User used must be a non-SSO user and must have access to the Site and must have access to all the Pages that are to be exported.
 - If necessary, create a Public page and add the 'Sign In' widget. This isn't necessary for the crawler to work but may be required to successfully login as the non-SSO user in a SSO enabled environment during setup. This page can be deleted once the encrypred credentials have been extracted. 
