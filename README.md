@@ -1,6 +1,6 @@
 **Introduction**
 
-- This module can be used to export all of the Private Pages of a Liferay Site to HTML, with a HTML file created per page. 
+- This module can be used to export all of the Private Pages of a Liferay Site to HTML. The module calls layoutLocalService.getLayouts(siteId, true) to get the list of Private Pages them for each Private Page a HTML file is created per page.
 - The module exposes a custom Gogo shell command: siteCrawler:crawlPrivatePages
 
 **Usage**
