@@ -1,20 +1,20 @@
 **Introduction**
 
 - This module can be used to export all of the Private Pages of a Liferay Site to HTML, with a HTML file created per page. 
-- The module exposes a custom Gogo shell command: siteCrawler:crawlPages
+- The module exposes a custom Gogo shell command: siteCrawler:crawlPrivatePages
 
 **Usage**
 
 The syntax and arguments to call Gogo shell command are as follows:
 
 ```
-siteCrawler:crawlPages "[companyId]" "[siteId]" "[layoutUrlPrefix]" "[emailAddress]" "[emailAddressEnc]" "[passwordEnc]" "[cookieDomain]" "[outputBaseFolder]"
+siteCrawler:crawlPrivatePages "[companyId]" "[siteId]" "[layoutUrlPrefix]" "[emailAddress]" "[emailAddressEnc]" "[passwordEnc]" "[cookieDomain]" "[outputBaseFolder]"
 ```
 
 For example:
 
 ```
-siteCrawler:crawlPages "23990396268826" "32920" "https://webserver-lctmwklmsitescraper-prd.lfr.cloud/group/mw" "test@liferay.com" "677a746b7976694c6447763272666c7658754f5167413d3d" "6b6467536d6d766b48684e63772f427451596b4e62513d3d" "webserver-lctmwklmsitescraper-prd.lfr.cloud" "/mnt/persistent-storage/"
+siteCrawler:crawlPrivatePages "23990396268826" "32920" "https://webserver-lctmwklmsitescraper-prd.lfr.cloud/group/mw" "test@liferay.com" "677a746b7976694c6447763272666c7658754f5167413d3d" "6b6467536d6d766b48684e63772f427451596b4e62513d3d" "webserver-lctmwklmsitescraper-prd.lfr.cloud" "/mnt/persistent-storage/"
 ```
 
 Note: 
