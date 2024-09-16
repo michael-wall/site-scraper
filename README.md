@@ -1,9 +1,7 @@
 **Introduction**
 
-- This module can be used to export the Private Pages of a Liferay Site to HTML, with a HTML file created per page. 
+- This module can be used to export all of the Private Pages of a Liferay Site to HTML, with a HTML file created per page. 
 - The module exposes a custom Gogo shell command: siteCrawler:crawlPages
-- The module has been tested in a local environment with JDK 8, Liferay DXP 7.4 U92 and OpenID SSO enabled.
-- The module has also been tested in a Liferay PaaS environment with JDK 11, a more recent Liferay DXP quarterly release but without OpenID SSO enabled.
 
 **Usage**
 
@@ -21,7 +19,7 @@ siteCrawler:crawlPages "23990396268826" "32920" "https://webserver-lctmwklmsites
 
 Note: 
 - All arguments are passed as String values with quotes and a space separator between arguments.
-- In a High Availability (i.e. clustered environment) the output will only be created on the node the Gogo shell is run on. The Gogo shell command can be run from the Liferay service shell to control which node is used.
+- In a High Availability (i.e. clustered environment) the output may only be created on the node the Gogo shell is run on depending on outputBaseFolder. The Gogo shell command can be run from the Liferay service shell to control which node is used.
 
 Arguments:
 
@@ -32,7 +30,7 @@ Arguments:
 - emailAddressEnc: The encrypted email address of the user. See 'Crawler User Account' section.
 - passwordEnc: The encrypted password of the user. See 'Crawler User Account' section.
 - cookieDomain: The Cookie Domain for the credentials. See 'Crawler User Account' section.
-- outputBaseFolder: The base folder that the output should be written to. In Liferay PaaS this can be use the Liferay service's persistent storage directory i.e. "/mnt/persistent-storage/". A timestamp based folder will be created within this base folder e.g. /mnt/persistent-storage/siteExport_1726484407262
+- outputBaseFolder: The base folder that the output should be written to. In Liferay PaaS this can be the Liferay service's persistent storage directory i.e. "/mnt/persistent-storage/". A timestamp based folder will be created within this base folder e.g. /mnt/persistent-storage/siteExport_1726484407262
 
 **Crawler User Account**
 
@@ -61,3 +59,8 @@ The module is designed to use a non-SSO enabled account to perform the crawling.
 ```
 lcp files download --prefix /siteExport_1726490121400/ --dest c:/temp
 ```
+
+**Notes**
+
+- The module has been tested in a local environment with JDK 8, Liferay DXP 7.4 U92 and OpenID SSO enabled.
+- The module has also been tested in a Liferay PaaS environment with JDK 11, a more recent Liferay DXP quarterly release but without OpenID SSO enabled.
