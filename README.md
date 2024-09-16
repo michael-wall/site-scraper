@@ -67,3 +67,4 @@ lcp files download --prefix /siteExport_1726490121400 --dest c:/temp
 
 - The module has been tested in a local environment with JDK 8, Liferay DXP 7.4 U92 and OpenID SSO enabled.
 - The module has also been tested in a Liferay PaaS environment with JDK 11, a more recent Liferay DXP quarterly release but without OpenID SSO enabled.
+- Javascript, CSS, images and other dependencies are not currently downloaded.
