@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
 
 @Component(
 		immediate = true,
-		property = {"osgi.command.function=crawlPages", "osgi.command.scope=siteCrawler"},
+		property = {"osgi.command.function=crawlPrivatePages", "osgi.command.scope=siteCrawler"},
 		service = SiteCrawler.class
 	)
 public class SiteCrawler {
@@ -38,18 +38,18 @@ public class SiteCrawler {
 		if (_log.isInfoEnabled()) _log.info("activating");
 	}
 
-	public void crawlPages(String companyIdString, String siteIdString, String cookieHostName, String layoutUrlPrefix, String emailAddress, String emailAddressEnc, String passwordEnc, String outputBaseFolder) {
+	public void crawlPrivatePages(String companyIdString, String siteIdString, String layoutUrlPrefix, String emailAddress, String emailAddressEnc, String passwordEnc, String cookieDomain, String outputBaseFolder) {
 		
 		long companyId = Long.valueOf(companyIdString);
 		long siteId = Long.valueOf(siteIdString);
 		
 		_log.info("CompanyId: " + companyId);
 		_log.info("SiteId: " + siteId);
-		_log.info("CookieHostName: " + cookieHostName);
 		_log.info("LayoutURLPrefix: " + layoutUrlPrefix);
 		_log.info("EmailAddress: " + emailAddress);
 		_log.info("EmailAddressEnc: " + emailAddressEnc);
 		_log.info("PasswordEnc: " + passwordEnc);
+		_log.info("CookieDomain: " + cookieDomain);
 		_log.info("Output Base Folder: " + outputBaseFolder);
 		
 		Company company = companyLocalService.fetchCompany(companyId);
@@ -84,7 +84,7 @@ public class SiteCrawler {
 		_log.info("Private Page Count: " + layouts.size());
 		System.out.println("Private Page Count: " + layouts.size());
 		
-		PrivateLayoutCrawler layoutCrawler = new PrivateLayoutCrawler(cookieHostName, layoutUrlPrefix, emailAddressEnc, passwordEnc);
+		PrivateLayoutCrawler layoutCrawler = new PrivateLayoutCrawler(layoutUrlPrefix, emailAddressEnc, passwordEnc, cookieDomain);
 		
 		String folderName = "/siteExport_" + System.currentTimeMillis();
 		

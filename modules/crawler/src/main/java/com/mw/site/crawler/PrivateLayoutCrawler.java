@@ -23,14 +23,13 @@ import org.apache.http.util.EntityUtils;
 
 public class PrivateLayoutCrawler {
 
-    public PrivateLayoutCrawler(
-            String cookieHostName, String layoutUrlPrefix, String idEnc, String passwordEnc) {
+    public PrivateLayoutCrawler(String layoutUrlPrefix, String idEnc, String passwordEnc, String cookieDomain) {
 
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 
         _httpClient = httpClientBuilder.setUserAgent(_USER_AGENT).build();
         
-        _cookieHostName = cookieHostName;
+        _cookieDomain = cookieDomain;
         _layoutUrlPrefix = layoutUrlPrefix;
 
         initializeCredentials(idEnc, passwordEnc);
@@ -40,11 +39,11 @@ public class PrivateLayoutCrawler {
 
         try {
             HttpClientContext httpClientContext =
-                    _getBasicHttpClientContext(_cookieHostName);
+                    _getBasicHttpClientContext(_cookieDomain);
 
             BasicClientCookie guestLanguageIdClientCookie = _createClientCookie(
                     CookieKeys.GUEST_LANGUAGE_ID, LocaleUtil.toLanguageId(locale),
-                    _cookieHostName);
+                    _cookieDomain);
 
             httpClientContext.getCookieStore().addCookie(
                     guestLanguageIdClientCookie);
@@ -131,13 +130,13 @@ public class PrivateLayoutCrawler {
     private static final String _rememberMe = Boolean.toString(true);
 
     private static final String _USER_AGENT = "Liferay Page Crawler";
-
-    private String _cookieHostName;
+    
     private String _layoutUrlPrefix;
 
     private String _autoPasswordEnc;
     private String _autoUserIdEnc;
-
+    private String _cookieDomain;
+    
     private HttpClient _httpClient;
 
     private HttpClientContext _httpClientContext;
