@@ -38,18 +38,19 @@ public class SiteCrawler {
 		if (_log.isInfoEnabled()) _log.info("activating");
 	}
 
-	public void crawlPages(String companyIdString, String siteIdString, String cookieHostName, String layoutUrlPrefix, String emailAddress, String emailAddressEnc, String passwordEnc) {
+	public void crawlPages(String companyIdString, String siteIdString, String cookieHostName, String layoutUrlPrefix, String emailAddress, String emailAddressEnc, String passwordEnc, String outputBaseFolder) {
 		
 		long companyId = Long.valueOf(companyIdString);
 		long siteId = Long.valueOf(siteIdString);
 		
 		_log.info("CompanyId: " + companyId);
 		_log.info("SiteId: " + siteId);
-		_log.info("Cookie HostName: " + cookieHostName);
-		_log.info("Layout URL Prefix: " + layoutUrlPrefix);
+		_log.info("CookieHostName: " + cookieHostName);
+		_log.info("LayoutURLPrefix: " + layoutUrlPrefix);
 		_log.info("EmailAddress: " + emailAddress);
 		_log.info("EmailAddressEnc: " + emailAddressEnc);
-		_log.info("passwordEnc: " + passwordEnc);
+		_log.info("PasswordEnc: " + passwordEnc);
+		_log.info("Output Base Folder: " + outputBaseFolder);
 		
 		Company company = companyLocalService.fetchCompany(companyId);
 		
@@ -81,15 +82,17 @@ public class SiteCrawler {
 		List<Layout> layouts = layoutLocalService.getLayouts(siteId, true);
 		
 		_log.info("Private Page Count: " + layouts.size());
+		System.out.println("Private Page Count: " + layouts.size());
 		
 		PrivateLayoutCrawler layoutCrawler = new PrivateLayoutCrawler(cookieHostName, layoutUrlPrefix, emailAddressEnc, passwordEnc);
 		
 		String folderName = "/siteExport_" + System.currentTimeMillis();
 		
-		File outputFolder = new File(folderName);
+		File outputFolder = new File(outputBaseFolder + folderName);
 		if (!outputFolder.exists()) outputFolder.mkdirs();
 		
-		_log.info(outputFolder.getAbsolutePath());
+		_log.info("Output location: " + outputFolder.getAbsolutePath());
+		System.out.println("Output location: " + outputFolder.getAbsolutePath());
 		
 		for (Layout layout: layouts) {
 			String layoutContent = crawlPageContent(layout, layoutCrawler, user.getLocale());
@@ -97,7 +100,7 @@ public class SiteCrawler {
 			PrintWriter printWriter = null;
 
 			try {
-				printWriter = new PrintWriter(folderName + "/" + layout.getFriendlyURL().replaceAll("/", "_") + ".html");
+				printWriter = new PrintWriter(outputFolder.getAbsolutePath() + "/" + layout.getFriendlyURL().replaceAll("/", "_") + ".html");
 				
 				printWriter.println(layoutContent);
 			} catch (FileNotFoundException e) {
@@ -108,6 +111,9 @@ public class SiteCrawler {
 				printWriter.close();
 			}
 		}
+		
+		_log.info("Done...");
+		System.out.println("Done...");
 	}
 	
     private String crawlPageContent(
