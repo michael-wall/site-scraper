@@ -1,0 +1,10 @@
+Bundle-Name: site-crawler
+Bundle-SymbolicName: com.mw.site.crawler
+Bundle-Version: 1.0.0
+Import-Package:\
+	!org.apache.avalon.framework.logger,\
+	!org.apache.log,\
+	!org.apache.log4j,\
+	\
+	*
+Export-Package: com.mw.site.crawler
